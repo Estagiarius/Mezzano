@@ -73,109 +73,97 @@ The line editor supports most standard line navigation and editing commands.
 
 `Tab`          Cycle through completions for the current symbol.
 
-# Editor commands
+# Editor
 
-The editor mostly follows Emacs conventions.
+Mezzano includes a powerful text editor with Emacs-like keybindings, suitable for general text editing and Lisp development. For a detailed explanation of its features, concepts (buffers, files, regions, kill/yank, Lisp interaction), and a full guide, please see the [Mezzano Text Editor Manual](editor-manual.md).
 
-`C-F`          Move forward (right) one character, also bound to Right-Arrow.
+Launch the editor using the `(edit)` command or `(mezzano.gui.editor:spawn-editor)`:
+*   `(edit)` or `(mezzano.gui.editor:spawn-editor)`: Opens a new, empty buffer.
+*   `(edit "path/to/file")`: Opens the specified file.
 
-`C-B`          Move backward (left) one character, also bound to Left-Arrow.
+## Common Editor Keybindings
 
-`C-N`          Move to the next line (down), also bound to Down-Arrow.
+Here is a summary of common keybindings. Refer to the [Editor Manual](editor-manual.md) for more context.
 
-`C-P`          Move to the previous line (up), also bound to Up-Arrow.
+**Movement:**
+`C-F` / `Right-Arrow`: Forward character
+`C-B` / `Left-Arrow`: Backward character
+`C-N` / `Down-Arrow`: Next line
+`C-P` / `Up-Arrow`: Previous line
+`C-A` / `Home`: Beginning of line
+`C-E` / `End`: End of line
+`M-F` / `M-Right-Arrow`: Forward word
+`M-B` / `M-Left-Arrow`: Backward word
+`M-<` / `Home` (sometimes): Beginning of buffer
+`M->` / `End` (sometimes): End of buffer
+`C-V` / `Page-Down`: Page down
+`M-V` / `Page-Up`: Page up
+`C-M-F`: Forward s-expression
+`C-M-B`: Backward s-expression
+`C-C C-A`: Move to start of current top-level Lisp form
 
-`C-A`          Move to beginning of line.
+**Editing (Deleting/Killing):**
+`C-D` / `Delete`: Delete next character
+`Backspace`: Delete previous character
+`M-D`: Kill next word
+`M-Backspace`: Kill previous word
+`C-K`: Kill from cursor to end of line (or newline if at EOL)
+`C-M-K`: Kill next s-expression
+`C-W`: Kill region (between point and mark)
 
-`C-E`          Move to end of line.
+**Yanking (Pasting):**
+`C-Y`: Yank last killed text
 
-`M-<`          Move to the beginning of the buffer, also bound to Home.
+**Mark and Region:**
+`C-Space`: Set mark / Deactivate mark
+`C-X C-X`: Swap point and mark
 
-`M->`          Move to the end of the buffer, also bound to End.
+**File Operations:**
+`C-X C-F`: Open or create a file
+`C-X C-S`: Save current buffer
+`C-X C-W`: Save buffer with new path
 
-`C-V`          Move the point to the bottom of the screen and recenter, also bound to Page-Down.
+**Buffer Management:**
+`C-X b`: Switch to a different buffer
+`C-X C-B`: List buffers
+`C-X k`: Close (kill) current buffer
 
-`M-V`          Move the point to the top of the screen and recenter, also
+**Lisp Interaction:**
+`C-C C-C`: Evaluate current top-level Lisp form
+`M-x repl`: Create an editor-based REPL
 
-bound to Page-Up.
-
-`M-F`          Move forward one word.
-
-`M-B`          Move backward one word.
-
-`C-M-F`        Move forward one s-expression.
-
-`C-M-B`        Move backward one s-expression.
-
-`C-D`          Delete the next character, also bound to Delete.
-
-`Backspace`    Delete the previous character.
-
-`M-D`          Kill the next word.
-
-`M-Backspace`  Kill the previous word.
-
-`C-K`          Kill characters from the point to the end of the line, or kill
-
-the newline if the point is at the end of the line.
-
-`C-M-K`        Kill the next s-expression forward.
-
-`C-W`          Kill the area between the point and the mark.
-
-`C-Y`          Yank the last killed text back into the buffer at the point.
-
-`C-L`          Recenter the display on the point.
-
-`M-L`          Redraw the screen.
-
-`C-Q`          Insert the next key typed without intepretting it as a command.
-
-`C-Space`      If the point is at the mark and the mark is active, deactivate the mark. Otherwise, activate the mark and move it to the point.
-
-`C-X C-X`      Swap the point and the mark.
-
-`C-X C-F`      Open or create a file.
-
-`C-X C-S`      Save the current buffer. If the buffer has no path, you will be prompted for a location to save it.
-
-`C-X C-W`      Save the current buffer with a new path.
-
-`C-X b`        Switch to a different buffer.
-
-`C-X C-B`      List buffers.
-
-`C-X k`        Close an open buffer.
-
-`C-G`          Abort the current command.
-
-`C-C C-C`      Evaluate the current top-level form.
-
-`C-C C-A`      Move to the start of the current top-level form.
-
-`M-x repl`     Create an editor-based REPL.
+**Miscellaneous:**
+`C-L`: Recenter display
+`M-L`: Redraw screen
+`C-Q`: Insert next key typed literally
+`C-G`: Abort current command
 
 # Applications
 
 Mezzano comes with several built-in applications. These are typically launched by typing a Lisp command in the REPL. Common applications include:
 
-*   **Filer:** A graphical file manager.
+*   **Filer:** A graphical file manager. See the [Filer Manual](filer-manual.md) for detailed information.
     *   Launch (example): `(mezzano.gui.filer:spawn)`
-*   **Peek:** A system information tool. View running tasks, memory, network configuration, etc.
+*   **Peek:** A system information tool. View running tasks, memory, network configuration, etc. See the [Peek Manual](peek-manual.md) for detailed information.
     *   Launch (example): `(mezzano.gui.peek:spawn)`
-*   **Editor:** A text editor with Emacs-like keybindings (detailed in "Editor commands" section).
+*   **Editor:** A text editor with Emacs-like keybindings. See the [Editor Manual](editor-manual.md) for full details.
     *   Launch (example, new buffer): `(edit)` or `(mezzano.gui.editor:spawn-editor)`
     *   Launch (example, specific file): `(edit "/path/to/your/file.txt")`
 *   **Memory Monitor:** Displays graphs and bitmaps of virtual and physical memory usage.
     *   Launch (example): `(mezzano.gui.memory-monitor:spawn)`
-*   **IRC Client:** For connecting to IRC servers.
+*   **IRC Client:** For connecting to IRC servers. See the [IRC Client Manual](irc-manual.md) for detailed information.
     *   Launch (example): `(mezzano.application.irc:spawn)`
-*   **Telnet Client:** For connecting to Telnet servers.
+*   **Telnet Client:** For connecting to Telnet servers. See the [Telnet Client Manual](telnet-manual.md) for detailed information.
     *   Launch (example): `(mezzano.application.telnet:spawn)`
-*   **Mandelbrot:** A visual Mandelbrot set generator.
-    *   Launch (example): `(mezzano.mandelbrot:spawn)`
-*   **Spy:** A tool for inspecting threads and system activity.
-*   **Settings:** For configuring system settings.
+*   **Mandelbrot:** `(mezzano.mandelbrot:spawn &optional width height)`
+    This application renders a colourful visualization of the Mandelbrot set or a Julia set. The window displays the fractal, which is drawn progressively.
+    *   Press `M` to view the Mandelbrot set (default).
+    *   Press `J` to switch to viewing a predefined Julia set.
+    The fractal's colours will vary subtly with each full redraw as they are influenced by the current time. The window is resizable, and resizing will trigger a recalculation and redraw of the fractal.
+*   **Spy:** `(mezzano.gui.spy:spawn)`
+    A developer utility for inspecting the internal state of the GUI compositor and input systems. The Spy window displays a text-based stream of information that updates periodically. This includes current mouse coordinates and button states, the window under the mouse, active drag operations, the current system keymap, keyboard modifier states, a list of all windows, and other low-level GUI details. This tool is primarily useful for debugging GUI behavior.
+*   **Settings:** `(mezzano.gui.settings:spawn)`
+    This application allows you to configure basic system settings. Currently, its primary function is to **change the system keyboard layout (keymap)**. Upon launching, it displays a list of available keymaps (e.g., En-GB, En-US, German). Clicking on one of these buttons immediately switches the system's active keymap to the selected layout. The currently active keymap button is typically highlighted.
 
 *Note: The exact launch commands might vary. Some applications might also be launchable from a system menu if one is available in your Mezzano version.*
 
@@ -224,31 +212,53 @@ From left to right:
 
 # Memory Monitor
 
-The memory monitor has two modes. The first mode displays a graph of virtual
-memory usage. The second mode displays a bitmap indicating how each page
-of physical memory is used, with colours indicating type.
+The Memory Monitor application provides a visual display of physical and virtual memory usage. It helps in understanding how memory is allocated and utilized by the system.
 
-Virtual Memory Graph Colours:
------
+**Launch Command:** `(mezzano.gui.memory-monitor:spawn &optional width height)`
 
-`Dark Blue`    General area % usage.
+The Memory Monitor has two main modes, which can be switched using keyboard shortcuts or by clicking tabs at the top of the window:
+*   **Graphs Mode (Press 'G' or click "Graphs" tab):** This is often the default mode. It displays scrolling line graphs for various virtual memory metrics over time.
+*   **Physical Visualizer Mode (Press 'P' or click "Physical Visualizer" tab):** This mode displays a bitmap where each pixel or small block represents a page (or group of pages) of physical memory, colored according to its current usage type.
 
-`Purple`       General area bytes allocated and committed.
+Press `Space` to refresh the current view.
 
-`Green`        Cons area % usage.
+## Graphs Mode Details
 
-`Lime Green`   Cons area bytes allocated and committed.
+In Graphs Mode, several metrics are tracked:
 
-`Red`          Pinned area % usage.
+*   **General Area Usage (%):** Percentage of the general-purpose memory area currently in use.
+*   **General Area Bytes Allocated:** Total bytes allocated in the general area (autoscaled graph).
+*   **General Area Bytes Committed:** Total bytes committed in the general area (autoscaled graph).
+*   **Cons Area Usage (%):** Percentage of the memory area dedicated to Lisp cons cells currently in use.
+*   **Cons Area Bytes Allocated:** Total bytes allocated in the cons area (autoscaled graph).
+*   **Cons Area Bytes Committed:** Total bytes committed in the cons area (autoscaled graph).
+*   **Pinned Area Usage (%):** Percentage of memory pinned for specific purposes (e.g., DMA).
+*   **Wired Area Usage (%):** Percentage of memory wired down (cannot be paged out).
+*   **Function Area Usage (%):** Percentage of memory used for compiled function code.
+*   **Wired Function Area Usage (%):** Percentage of function area memory that is wired.
 
-`Hot Pink`     Wired area % usage.
+**Graph Colours:**
+The colours for the lines in the Graphs Mode correspond to specific metrics:
 
-`Brown`        Function area % usage.
+*   **General Area % Usage:** `Dark Blue` (controlled by `theme:*memory-monitor-general-area-usage*`)
+*   **General Area Bytes Allocated:** `Purple` (controlled by `theme:*memory-monitor-general-area-alloc*`)
+*   **General Area Bytes Committed:** (controlled by `theme:*memory-monitor-general-area-commit*`)
+*   **Cons Area % Usage:** `Green` (controlled by `theme:*memory-monitor-cons-area-usage*`)
+*   **Cons Area Bytes Allocated:** `Lime Green` (controlled by `theme:*memory-monitor-cons-area-alloc*`)
+*   **Cons Area Bytes Committed:** (controlled by `theme:*memory-monitor-cons-area-commit*`)
+*   **Pinned Area % Usage:** `Red` (controlled by `theme:*memory-monitor-pinned-area-usage*`)
+*   **Wired Area % Usage:** `Hot Pink` (controlled by `theme:*memory-monitor-wired-area-usage*`)
+*   **Function Area % Usage:** `Brown` (controlled by `theme:*memory-monitor-function-area-usage*`)
+*   **Wired Function Area % Usage:** `Lilac` (controlled by `theme:*memory-monitor-wired-function-area-usage*`)
 
-`Lilac`        Wired Function area % usage.
+The graph background is typically a dark color (controlled by `theme:*memory-monitor-graph-background*`), and a vertical tracker line indicates the current sampling point (controlled by `theme:*memory-monitor-graph-tracker*`).
 
-Physical Memory Colours:
------
+## Physical Visualizer Mode Details
+
+This mode displays a bitmap indicating how each page of physical memory is used.
+
+**Physical Memory Colours:**
+These colours indicate the status of physical memory pages:
 
 `Blue`         Free memory.
 

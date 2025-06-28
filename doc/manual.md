@@ -13,9 +13,16 @@ Welcome to the Mezzano documentation. This document serves as a central hub for 
         *   Line editing and editor commands
         *   System features like snapshotting
         *   The meaning of the "blinkenlights" status indicators
-        *   Details on built-in applications (Filer, Peek, Editor, etc.)
+        *   Details on built-in applications (Mandelbrot, Spy, Settings, etc.)
         *   Networking information
         *   Using Swank for Common Lisp development
+    *   Specific Application Manuals:
+        *   [Filer Manual](filer-manual.md)
+        *   [Peek Manual](peek-manual.md)
+        *   [Text Editor Manual](editor-manual.md)
+        *   [Memory Monitor](user-manual.md#memory-monitor) (details within User Manual)
+        *   [IRC Client Manual](irc-manual.md)
+        *   [Telnet Client Manual](telnet-manual.md)
 
 *   **[Frequently Asked Questions (FAQ)](faq.md)**
     *   Find answers to common questions about hardware support, building from source, getting help, saving work, and more.
