@@ -1,3 +1,9 @@
+Welcome to the Mezzano User Manual. This document provides detailed information about Mezzano's features, built-in applications, and system usage.
+
+For a guide on setting up Mezzano for the first time, please see the [Getting Started Guide](getting-started.md).
+For answers to common questions, refer to the [FAQ](faq.md).
+For step-by-step examples of common tasks, see the [Tutorials](tutorials.md).
+
 # Basic functionality
 
 `C-<key>` means to hold the control key while typing `<key>`.
@@ -148,6 +154,43 @@ the newline if the point is at the end of the line.
 `C-C C-A`      Move to the start of the current top-level form.
 
 `M-x repl`     Create an editor-based REPL.
+
+# Applications
+
+Mezzano comes with several built-in applications. These are typically launched by typing a Lisp command in the REPL. Common applications include:
+
+*   **Filer:** A graphical file manager.
+    *   Launch (example): `(mezzano.gui.filer:spawn)`
+*   **Peek:** A system information tool. View running tasks, memory, network configuration, etc.
+    *   Launch (example): `(mezzano.gui.peek:spawn)`
+*   **Editor:** A text editor with Emacs-like keybindings (detailed in "Editor commands" section).
+    *   Launch (example, new buffer): `(edit)` or `(mezzano.gui.editor:spawn-editor)`
+    *   Launch (example, specific file): `(edit "/path/to/your/file.txt")`
+*   **Memory Monitor:** Displays graphs and bitmaps of virtual and physical memory usage.
+    *   Launch (example): `(mezzano.gui.memory-monitor:spawn)`
+*   **IRC Client:** For connecting to IRC servers.
+    *   Launch (example): `(mezzano.application.irc:spawn)`
+*   **Telnet Client:** For connecting to Telnet servers.
+    *   Launch (example): `(mezzano.application.telnet:spawn)`
+*   **Mandelbrot:** A visual Mandelbrot set generator.
+    *   Launch (example): `(mezzano.mandelbrot:spawn)`
+*   **Spy:** A tool for inspecting threads and system activity.
+*   **Settings:** For configuring system settings.
+
+*Note: The exact launch commands might vary. Some applications might also be launchable from a system menu if one is available in your Mezzano version.*
+
+# Networking
+
+Mezzano supports networking with specific hardware and configurations:
+
+*   **Supported NICs:** RTL8168 and virtio-net are the primary supported network interface cards.
+    *   When using VirtualBox, the **Intel PRO/1000 MT Desktop (82540EM)** adapter (often a default for Linux VMs) is generally compatible as it can operate in a mode that Mezzano supports.
+    *   For QEMU, `virtio-net` is recommended.
+*   **Configuration:** Network settings can be viewed using the "Network" pane within the **Peek** application.
+*   **Default Network:** The default network setup is often tailored for NAT configurations in VirtualBox and QEMU.
+*   **Limitations:**
+    *   **DHCP is not currently supported.** IP addresses and network settings typically need to be configured manually or rely on the VM's NAT providing a usable static configuration.
+    *   Bridging to a real network (to get an IP on your LAN) is not supported out-of-the-box and would require manual setup.
 
 # Whole-system transparent persistence support
 

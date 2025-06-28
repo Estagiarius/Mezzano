@@ -10,11 +10,16 @@ Demo releases are available through [GitHub](https://github.com/froggey/Mezzano/
 
 These releases are designed to be run in VirtualBox, though QEMU is also supported.
 2GB of RAM, a virtio-net NIC and an Intel HDA audio controller are recommended.
+For instructions on getting started and using Mezzano, please see our [User Documentation](doc/manual.md).
 
 x86-64 images are published.  AArch64 has been made to work on some
 hardware.  But to set expectations: making Mezzano run on any given
 piece of hardware or emulator is still typically a project that
 requires the user to dig into the code.
+
+## Documentation
+
+Comprehensive user documentation, including a getting started guide, user manual, FAQ, and tutorials, can be found in the [doc/manual.md](doc/manual.md) file, which serves as the main entry point for our documentation.
 
 ## Building from source
 
